@@ -80,22 +80,48 @@ export function isConstructable(fn: () => any | FunctionConstructor) {
 }
 
 const setFnCacheMap = new WeakMap<CallableFunction, CallableFunction>();
-export function checkProxyFunction(value: any) {
+// 缓存来自沙箱内部的方法
+const proxyFnCacheMap = new WeakMap<Window | ShadowRoot | Location, WeakMap<CallableFunction, CallableFunction>>();
+export function checkProxyFunction(target: Window | ShadowRoot | Document | Location, value: any) {
   if (isCallable(value) && !isBoundedFunction(value) && !isConstructable(value)) {
-    if (!setFnCacheMap.has(value)) {
-      setFnCacheMap.set(value, value);
+    const isDocument = target instanceof Document;
+    if (isDocument) {
+      if (!setFnCacheMap.has(value)) {
+        setFnCacheMap.set(value, value);
+      }
+    } else {
+      if (!proxyFnCacheMap.has(target)) {
+        proxyFnCacheMap.set(target, new WeakMap());
+      }
+      if (!proxyFnCacheMap.get(target).has(value)) {
+        proxyFnCacheMap.get(target).set(value, value);
+      }
     }
   }
 }
 
-export function getTargetValue(target: any, p: any): any {
+export function getTargetValue(target: Window | ShadowRoot | Document | Location, p: PropertyKey): any {
   const value = target[p];
-  if (setFnCacheMap.has(value)) {
-    return setFnCacheMap.get(value);
+  const isDocument = target instanceof Document;
+  if (isDocument) {
+    if (setFnCacheMap.has(value)) {
+      return setFnCacheMap.get(value);
+    }
+  } else {
+    if (proxyFnCacheMap.has(target) && proxyFnCacheMap.get(target).has(value)) {
+      return proxyFnCacheMap.get(target).get(value);
+    }
   }
   if (isCallable(value) && !isBoundedFunction(value) && !isConstructable(value)) {
     const boundValue = Function.prototype.bind.call(value, target);
-    setFnCacheMap.set(value, boundValue);
+    if (isDocument) {
+      setFnCacheMap.set(value, boundValue);
+    } else {
+      if (!proxyFnCacheMap.has(target)) {
+        proxyFnCacheMap.set(target, new WeakMap());
+      }
+      proxyFnCacheMap.get(target).set(value, boundValue);
+    }
 
     for (const key in value) {
       boundValue[key] = value[key];

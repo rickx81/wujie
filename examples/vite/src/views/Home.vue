@@ -2,6 +2,7 @@
   <div>
     <HelloWorld msg="Vue3 + vite示例"></HelloWorld>
     <div class="content" style="text-align: center">
+      <el-button @click="handleClick">getSelection</el-button>
       <p>当前vite版本
         <el-tag style="vertical-align: text-top" size="small">2.7.2</el-tag>
       </p>
@@ -35,6 +36,11 @@ export default {
       window.open('https://github.com/Tencent/wujie/tree/master/examples/vite')
     }
   },
+  methods: {
+    handleClick() {
+      console.log('vite', getSelection())
+    }
+  }
 };
 </script>
 

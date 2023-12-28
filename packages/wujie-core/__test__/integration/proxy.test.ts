@@ -6,7 +6,7 @@ const generateTest = (
   AppNameList: typeof vueMainAppNameList | typeof reactMainAppNameList
 ) => {
   AppNameList.slice(0, 5).forEach((appName) => {
-    it("proxy test", async () => {
+    it("proxy test " + appName, async () => {
       const childApplicationMountedPromise = awaitConsoleLogMessage(page, AppInfoMap[appName].mountedMessage);
       await page.click(AppInfoMap[appName].linkSelector);
       await childApplicationMountedPromise;
@@ -18,7 +18,7 @@ const generateTest = (
         const currentObject: any = {};
         const childProxyWindow = childWindow.__WUJIE.proxy;
         childProxyWindow.addAttributeToObject = function addAttributeToObject() {
-          this.currentAttribute = "Add attribute";
+          this.currentAttribute = "Add attribute " + childName;
         };
         childProxyWindow.addAttributeToObject.call(currentObject);
         return {
@@ -27,7 +27,7 @@ const generateTest = (
         };
       }, appName);
 
-      expect(targetCurrentAttribute).toBe("Add attribute");
+      expect(targetCurrentAttribute).toBe("Add attribute " + appName);
       expect(isSameBoundFn).toBe(true);
     });
   });

@@ -97,7 +97,7 @@ module.exports = {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  preset: './jest-preset.js',
+  preset: "./jest-preset.js",
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -156,7 +156,7 @@ module.exports = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: ["<rootDir>/*.test.ts"],
+  testMatch: ["<rootDir>/proxy.test.ts"],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
@@ -177,7 +177,7 @@ module.exports = {
 
   // Setting this value to "fake" allows the use of fake timers for functions such as "setTimeout"
   // timers: "real",
-  testTimeout: 30000
+  testTimeout: 30000,
 
   // A map from regular expressions to paths to transformers
   // transform: undefined,

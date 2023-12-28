@@ -2,6 +2,7 @@
   <div>
     <HelloWorld msg="Vue3示例"></HelloWorld>
     <div class="content" style="text-align: center">
+      <el-button @click="handleClick">getSelection</el-button>
       <p>
         当前vue版本
         <el-tag style="vertical-align: text-top" size="small">3.2.24</el-tag>
@@ -34,6 +35,11 @@ export default {
   components: {
     HelloWorld,
   },
+  methods: {
+    handleClick() {
+      console.log('vue3', getSelection());
+    },
+  }
 };
 </script>
 

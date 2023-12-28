@@ -2,6 +2,7 @@
   <div>
     <HelloWorld msg="Vue2示例"></HelloWorld>
     <div class="content" style="text-align: center">
+      <el-button @click="handleClick">getSelection</el-button>
       <p>
         当前vue版本
         <el-tag style="vertical-align: text-top" size="small">2.6.11</el-tag>
@@ -22,21 +23,26 @@
 </template>
 
 <script>
-  import HelloWorld from "@/components/HelloWorld.vue";
-  export default {
-    data() {
-      return {
-        open: window.open,
-      };
+import HelloWorld from "@/components/HelloWorld.vue";
+export default {
+  data() {
+    return {
+      open: window.open,
+    };
+  },
+  components: {
+    HelloWorld,
+  },
+  methods: {
+    handleClick() {
+      console.log("vue2", getSelection());
     },
-    components: {
-      HelloWorld,
-    },
-  };
+  },
+};
 </script>
 
 <style>
-  :root {
-    --host-color: #f16b5f;
-  }
+:root {
+  --host-color: #f16b5f;
+}
 </style>
