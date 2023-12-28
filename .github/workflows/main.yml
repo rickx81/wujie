@@ -6,30 +6,29 @@ on:
       - v*
 
 jobs:
-
   publish:
-
     runs-on: ubuntu-latest
 
     steps:
-
       - uses: actions/checkout@v3
-      
+
       - uses: actions/setup-node@v3.3.0
         with:
-          node-version: '14.x'
+          node-version: 16
           check-latest: true
-          registry-url: 'https://registry.npmjs.org'
-          
+          registry-url: "https://registry.npmjs.org"
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
       - name: install
-        run: |
-          npm install -g pnpm@7.9.5
-          pnpm i  --filter "wujie-project" --filter "./packages/**" --no-frozen-lockfile
+        run: pnpm i  --filter "wujie-project" --filter "./packages/**" --no-frozen-lockfile
 
       - name: publish to npm
         run: |
-          ./node_modules/.bin/lerna run prepack
-          ./node_modules/.bin/lerna publish from-package --no-verify-access --ignore-scripts --create-release github -y 
+          ./node_modules/.bin/lerna run prepack --scope @rickx/wujie
+          ./node_modules/.bin/lerna run prepack --scope @rickx/wujie-*
+          ./node_modules/.bin/lerna publish from-package --no-verify-access --ignore-scripts --create-release github -y
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
