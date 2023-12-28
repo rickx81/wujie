@@ -42,7 +42,7 @@ importers:
         specifier: ^3.2.38
         version: 3.2.38
       wujie-vue3:
-        specifier: workspace:@rickx/wujie-vue3@^1.0.22-patch.1
+        specifier: workspace:@rickx/wujie-vue3@*
         version: link:../packages/wujie-vue3
     devDependencies:
       '@documate/vue':
@@ -299,7 +299,7 @@ importers:
         specifier: ^6.4.1
         version: 6.5.4(webpack@5.74.0)
       wujie-react:
-        specifier: workspace:@rickx/wujie-react@^1.0.22-patch.1
+        specifier: workspace:@rickx/wujie-react@*
         version: link:../../packages/wujie-react
 
   examples/main-vue:
@@ -323,10 +323,10 @@ importers:
         specifier: ^3.6.2
         version: 3.6.2
       wujie:
-        specifier: workspace:@rickx/wujie@^1.0.22-patch.1
+        specifier: workspace:@rickx/wujie@*
         version: link:../../packages/wujie-core
       wujie-vue2:
-        specifier: workspace:@rickx/wujie-vue2@^1.0.22-patch.1
+        specifier: workspace:@rickx/wujie-vue2@*
         version: link:../../packages/wujie-vue2
     devDependencies:
       '@vue/cli-plugin-babel':
@@ -534,7 +534,7 @@ importers:
         specifier: ^6.4.1
         version: 6.5.4(webpack@5.74.0)
       wujie-react:
-        specifier: workspace:@rickx/wujie-react@^1.0.22-patch.1
+        specifier: workspace:@rickx/wujie-react@*
         version: link:../../packages/wujie-react
     devDependencies:
       '@babel/plugin-proposal-nullish-coalescing-operator':
@@ -996,15 +996,15 @@ importers:
 
   packages/wujie-react:
     dependencies:
+      '@rickx/wujie':
+        specifier: workspace:*
+        version: link:../wujie-core
       prop-types:
         specifier: ^15.8.1
         version: 15.8.1
       react:
         specifier: '>=16.0.0'
         version: 17.0.2
-      wujie:
-        specifier: workspace:@rickx/wujie@^1.0.22-patch.1
-        version: link:../wujie-core
     devDependencies:
       '@babel/cli':
         specifier: ^7.18.6
@@ -1039,12 +1039,12 @@ importers:
 
   packages/wujie-vue2:
     dependencies:
+      '@rickx/wujie':
+        specifier: workspace:*
+        version: link:../wujie-core
       vue:
         specifier: ^2.6.0
         version: 2.7.10
-      wujie:
-        specifier: workspace:@rickx/wujie@^1.0.22-patch.1
-        version: link:../wujie-core
     devDependencies:
       '@babel/cli':
         specifier: ^7.18.6
@@ -1079,8 +1079,8 @@ importers:
 
   packages/wujie-vue3:
     dependencies:
-      wujie:
-        specifier: workspace:@rickx/wujie@^1.0.22-patch.1
+      '@rickx/wujie':
+        specifier: workspace:*
         version: link:../wujie-core
     devDependencies:
       '@babel/cli':
