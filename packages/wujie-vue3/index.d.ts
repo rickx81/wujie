@@ -1,4 +1,4 @@
-import { bus, preloadApp, destroyApp, setupApp } from "wujie";
+import { bus, preloadApp, destroyApp, setupApp } from "@rickx/wujie";
 import type { DefineComponent, Plugin } from 'vue';
 
 declare const WujieVue: DefineComponent & Plugin & {
