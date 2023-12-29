@@ -1,6 +1,6 @@
 {
   "name": "main-vue",
-  "version": "1.0.22-patch.2",
+  "version": "1.0.22-patch.3",
   "private": true,
   "scripts": {
     "start": "vue-cli-service serve",
